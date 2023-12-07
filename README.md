@@ -10,6 +10,4 @@ Chazzic service Front-end Development
     "react-router-dom": "^6.20.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
-    "recharts": "^2.9.3",
-    "recoil": "^0.7.7",
     "styled-components": "^6.1.1"
