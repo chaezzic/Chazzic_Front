@@ -16,7 +16,7 @@ const joboption=[
 function InterviewAi(){
 
   const octokit = new Octokit({
-    auth: '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'
+    auth: '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'
   });
 
   const JobcustomSelect ={
