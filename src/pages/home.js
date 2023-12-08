@@ -9,25 +9,25 @@ function Home(){
     console.log(code)
 
     if (code) {
-      getAccessToken(code);
+      fetchAccessToken(code);
     }
   }, []);
 
-  const getAccessToken = async (code) => {
-    let server = `http://172.20.14.72:3002`;
-    let accessInfo = await axios.get(
-      `${server}/githubLogin?code=${code}`
-    );
+  // const getAccessToken = async (code) => {
+  //   let server = `http://172.20.14.72:3002`;
+  //   let accessInfo = await axios.get(
+  //     `${server}/githubLogin?code=${code}`
+  //   );
 
-    let token = accessInfo.data.token;
+  //   let token = accessInfo.data.token;
 
-    const userResponse = await axios.get("https://api.github.com/user", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(userResponse.data)
-  }
+  //   const userResponse = await axios.get("https://api.github.com/user", {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
+  //   console.log(userResponse.data)
+  // }
   
   const fetchAccessToken = async (code) => {
     try {
