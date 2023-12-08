@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "../style/login.css"
 import imageLogo from "../image/chaezzic-logo 1.png"
 import { useNavigate } from "react-router-dom";
+import { Axios } from "axios";
 
-const CLIENT_ID = "c51f6062b05e61f74f6e";
 const redirectURL="http://localhost:3000"
 const GITHUB_AUTH_SERVER = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirectURL}`;
 
@@ -17,7 +17,7 @@ function Login(){
 
   const navigatetoHome=()=>{
     navigate("/");
-  }
+  };
 
     return(
         <div className="Loginbody">
