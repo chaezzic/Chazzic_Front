@@ -30,26 +30,23 @@ function Home(){
   // }
   
   const fetchAccessToken = async (code) => {
-    try {
-      const clientSecret = process.env.GITHUB_CLIENT_SECRET
-      const response = await fetch(`http://15.164.171.29:8080/oauth?code=${encodeURIComponent(code)}`);
-      console.log(response)
-      const data = await response.json();
+    fetch('http://localhost:8080/oauth/github', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ code })
+    })
+    .then(response => response.json())
+    .then(data => {
+      const accessToken = data.access_token;
       console.log(data)
-      if (data.access_token) {
-        // Store the access token in localStorage or context/state for future use
-        localStorage.setItem('github_access_token', data.access_token);
-  
-        // Update UI to reflect logged-in status
-        // For example, redirect to a dashboard or change login button to logout
-      } else {
-        // Handle any error or data issues here
-        console.error('No access token in response:', data);
-      }
-    } 
-    catch (error) {
-      console.error('Error fetching access token:', error);
-    }
+      // 액세스 토큰을 사용하여 필요한 작업 수행
+    })
+    .catch(error => {
+      console.error('Access token error', error);
+    });
   };
 
     return(

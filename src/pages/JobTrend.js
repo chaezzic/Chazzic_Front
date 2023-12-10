@@ -63,24 +63,21 @@ function JobTrend(){
   useEffect(()=>{
     const fetchJobData = async() =>{
       try{
-        // const response = await fetch('http://15.164.171.29:8080/job')
-        // .then(res=> res.json())
-        // .then(data=> setOptions(data.jobList))
-
-        // console.log("res")
-        // console.log(response)
-        const response = await fetch('http://15.164.171.29:8080/job');
+        const response = await fetch('http://localhost:8080/jobs/List');
         const data = await response.json();
 
-        setOptions(data.jobList)
+        //setOptions(data)
 
-        const transformedOptions = data.jobList.map((item, index) => ({
+        const transformedOptions = data
+        .filter((item, index, self) =>
+          index === self.findIndex((t) => t.jobTitle === item.jobTitle))
+        .map((item, index) => ({
           value: index,
-          label: item.job_title
+          label: item.jobTitle
         }));
         setJobOptions(transformedOptions);
 
-        const YeartransformedOptions = data.jobList
+        const YeartransformedOptions = data
         .filter((item, index, self) => 
           index === self.findIndex((t) => t.year === item.year))
         .map((item, index) => ({
@@ -89,12 +86,12 @@ function JobTrend(){
         }));
         setYearOptions(YeartransformedOptions);
 
-        const HalfYeartranformedOptions = data.jobList
+        const HalfYeartranformedOptions = data
         .filter((item, index, self) => 
-          index === self.findIndex((t) => t.apply_date === item.apply_date))
+          index === self.findIndex((t) => t.part === item.part))
         .map((item, index) => ({
           value: index,
-          label: item.apply_date
+          label: item.part
         }));
         setHalfYearOptions(HalfYeartranformedOptions);
       } 
@@ -123,15 +120,19 @@ function JobTrend(){
   };
   
   const [statistics, setStatistics] = useState([]);
+  const [totalCount, setTotalCount] = useState([]);
   const buttonHandler = async() => {
     if (!JobselectedOption){
       alert('옵션을 선택해주세요');
       return;
     }
     try{
-      const response = await fetch(`http://15.164.171.29:8080/join?job_title=${JobselectedOption.label}&year=${YearselectedOption.label}&apply_date=${HalfYearselectedOption.label}`);
+      const response = await fetch(`http://localhost:8080/jobs/Trend/${YearselectedOption.label}/${HalfYearselectedOption.label}/${JobselectedOption.label}`);
       const data = await response.json();
-      setStatistics(data.joinList);
+      console.log(data)
+      setStatistics(data.top5JobList);
+      setTotalCount(data.totalCount);
+      console.log("통계 : ",statistics)
     }
     catch(error){
       console.error('데이터 요청 실패', error);
@@ -191,15 +192,15 @@ function JobTrend(){
           </div>
           <div className="SkillTrendChart">
             <div className="ChartTitle">기술 스택 트렌드</div>
-            {statistics.map((stat, index) => (
+            {statistics && statistics.map((stat, index) => (
               <div className="BarItem" key={index}>
-                <div className="BarTypo">{stat.skill_name}</div>
+                <div className="BarTypo">{stat.skillName}</div>
                 <div className="BarChart">
                   <div className="BarChartMax">
                     <div className={`Rectangle${index + 9}`}
-                       style={{width: `${Math.round(stat.cnt / stat.total_jobs * 100 * 10) / 10}%`, height: 12, background: '#4285F4'}} />
+                       style={{width: `${Math.round(stat.skillCount / totalCount * 100 * 10) / 10}%`, height: 12, background: '#4285F4'}} />
                   </div>
-                  <div className="BarChartPercent">{Math.round(stat.cnt / stat.total_jobs * 100 * 10) / 10}%</div>
+                  <div className="BarChartPercent">{Math.round(stat.skillCount / totalCount * 100 * 10) / 10}%</div>
                 </div>
               </div>
             ))}
