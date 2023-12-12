@@ -30,7 +30,7 @@ function Home(){
   // }
   
   const fetchAccessToken = async (code) => {
-    fetch('http://localhost:8080/oauth/github', {
+    fetch('http://localhost:8080/oauth/token', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,10 +38,15 @@ function Home(){
       },
       body: JSON.stringify({ code })
     })
-    .then(response => response.json())
+    .then(response => {
+      if (response.headers.get('Content-Type').includes('application/json')) {
+      return response.json();
+    } else {
+      return response.text();
+    }})
     .then(data => {
       const accessToken = data.access_token;
-      console.log(data)
+      console.log("데이터?", data)
       // 액세스 토큰을 사용하여 필요한 작업 수행
     })
     .catch(error => {

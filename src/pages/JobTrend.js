@@ -63,7 +63,7 @@ function JobTrend(){
   useEffect(()=>{
     const fetchJobData = async() =>{
       try{
-        const response = await fetch('http://localhost:8080/jobs/List');
+        const response = await fetch('http://localhost:8080/jobs/list');
         const data = await response.json();
 
         //setOptions(data)
@@ -127,7 +127,7 @@ function JobTrend(){
       return;
     }
     try{
-      const response = await fetch(`http://localhost:8080/jobs/Trend/${YearselectedOption.label}/${HalfYearselectedOption.label}/${JobselectedOption.label}`);
+      const response = await fetch(`http://localhost:8080/jobs/showJobTrend/${YearselectedOption.label}/${HalfYearselectedOption.label}/${encodeURIComponent(JobselectedOption.label)}`);
       const data = await response.json();
       console.log(data)
       setStatistics(data.top5JobList);

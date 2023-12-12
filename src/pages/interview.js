@@ -16,7 +16,7 @@ const joboption=[
 function InterviewAi(){
 
   const octokit = new Octokit({
-    auth: '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'
+    auth: ''
   });
 
   const JobcustomSelect ={
@@ -45,6 +45,13 @@ function InterviewAi(){
     }
   const navigate = useNavigate();
   const navigateToOutput = () => {
+    if(!AiSelection){
+      alert('옵션을 선택해주세요');
+      return;
+    }
+    if(selectedRepos.length > 0){
+      localStorage.setItem('selectedRepository', JSON.stringify(selectedRepos[0]));
+    }
     navigate("/interviewai/output")
   };
 
@@ -61,6 +68,7 @@ function InterviewAi(){
   const fetchRepos = async () => {
     try{
       const response = await octokit.request('GET /user/repos');
+      console.log(response.data)
       setRepos(response.data);
       setIsRepoModalOpen(true);
     }
@@ -76,24 +84,30 @@ function InterviewAi(){
   const renderRepoModal = () => {
     if(!isRepoModalOpen) return null;
 
-    return(
-      <div className="modalOverlay">
-        <div className="modalContent">
-          <div className="modalHeader">
-            <h2>저장소 선택</h2>
-            <button onClick={() => setIsRepoModalOpen(false)}>닫기</button>
-          </div>
-          <div className="modalBody">
-            {repos.map(repo => (
-              <div key={repo.id} className="modalItem" onClick={() => selectRepo(repo)}>
-                {repo.full_name}
-              </div>
-            ))}
-          </div>
+  const unselectedRepos = repos.filter(repo => !selectedRepos.some(selectedRepo => selectedRepo.id === repo.id));
+
+  return(
+    <div className="modalOverlay">
+      <div className="modalContent">
+        <div className="modalHeader">
+          <h2>저장소 선택</h2>
+          <button onClick={() => setIsRepoModalOpen(false)}>닫기</button>
+        </div>
+        <div className="modalBody">
+          {unselectedRepos.map(repo => (
+            <div key={repo.id} className="modalItem" onClick={() => selectRepo(repo)}>
+              {repo.full_name}
+            </div>
+          ))}
         </div>
       </div>
-    )
-  }
+    </div>
+  )
+  };
+
+  const removeRepo = (repoId) => {
+    setSelectedRepos(prevRepos => prevRepos.filter(repo => repo.id !== repoId));
+  };
 
   const selectRepo = (repo) => {
     setSelectedRepos(prevRepos => [...prevRepos, repo]);
@@ -105,6 +119,7 @@ function InterviewAi(){
     return selectedRepos.map((repo, index) => (
       <div className="PopolItem" key={index}>
         <div className="RepositoryName">{repo.full_name}</div>
+        <button onClick={() => removeRepo(repo.id)}>삭제</button>
       </div>
     ));
   };
@@ -121,7 +136,6 @@ function InterviewAi(){
               <Select
                   className="Selection"
                   classNamePrefix="select"
-                  defaultValue={joboption[0]}
                   name="Job"
                   options={joboption}
                   isSearchable={false}
