@@ -15,8 +15,51 @@ const joboption=[
 
 function InterviewAi(){
 
+
+  const fetchFilesFromDirectory = async (repoName, path='') => {
+    try {
+      const response = await octokit.request(`GET /repos/${repoName}/contents/${path}`);
+      let files = [];
+      for (const item of response.data) {
+        if (item.type === 'file' && !isBinaryFile(item.name)) {
+          const fileResponse = await octokit.request(`GET /repos/${repoName}/contents/${item.path}`);
+          files.push({ name: item.name, content: atob(fileResponse.data.content) });
+        } else if (item.type === 'dir') {
+          const subFiles = await fetchFilesFromDirectory(repoName, item.path);
+          files = files.concat(subFiles);
+        }
+      }
+      return files;
+    } catch (error) {
+      console.error('Error fetching files:', error);
+      return [];
+    }
+  };
+
+  const submitPortfolio = async () => {
+    const portfolioData = await Promise.all(selectedRepos.map(async (repo) => {
+      const files = await fetchFilesFromDirectory(repo.full_name);
+      return { repoName: repo.full_name, language: repo.language ,files };
+    }));
+    console.log(portfolioData)
+
+    // try {
+    //   await axios.post('http://your-server-endpoint/api/upload', { portfolio: portfolioData });
+    //   alert('포트폴리오가 성공적으로 제출되었습니다.');
+    //   navigate('/some-redirect-route'); // 리다이렉트 경로
+    // } catch (error) {
+    //   console.error('Error sending portfolio to server:', error);
+    // }
+  };
+
+  function isBinaryFile(fileName) {
+    const extension = fileName.split('.').pop().toLowerCase();
+    const binaryExtensions = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'pdf', 'exe', 'bin', 'svg', 'ico', 'ttf', 'zip', 'woff', 'woff2', 'eot', 'otf']; // 확장 가능
+    return binaryExtensions.includes(extension);
+  };
+
   const octokit = new Octokit({
-    auth: ''
+    auth: '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'
   });
 
   const JobcustomSelect ={
@@ -152,7 +195,7 @@ function InterviewAi(){
                 <div className="ButtonTypo">+ 포트폴리오 추가하기</div>
               </button>
             </div>
-            <button className="OutputButton" onClick={navigateToOutput}>
+            <button className="OutputButton" onClick={submitPortfolio}>
               <div className="ButtonTypo">제출하기</div>
             </button>
           </div>
