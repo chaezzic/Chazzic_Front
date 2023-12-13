@@ -11,39 +11,6 @@ function Home(){
     if (code) {
       fetchAccessToken(code);
     }
-    
-    // 이 함수를 실행하여 OAuth 인증 코드를 사용하여 액세스 토큰을 교환
-    // const fetchAccessToken = async() => {
-    //   try{
-    //     const response = await fetch('http://localhost:8080/oauth/token');
-    //     const token = await response.text();
-    //     console.log(response)
-    //     console.log("받아온 토큰: ", token)
-    //   }
-    //   catch(error){
-    //     console.error('토큰을 받아오는 중 오류 발생:', error)
-    //   }
-    // }
-    // fetchAccessToken();
-    // const code = new URLSearchParams(window.location.search).get('code');
-    // console.log(code)
-
-    // if (code) {
-    //   fetchAccessToken(code);
-    // }
-    // fetch('http://localhost:8080/oauth/token')
-    // .then(response => {
-    //   if (!response.ok) {
-    //     throw new Error(`HTTP error! Status: ${response.status}`);
-    //   }
-    //   return response.text(); // 텍스트 형식으로 응답 받기
-    // })
-    // .then(token => {
-    //   console.log('받아온 토큰:', token);
-    //   // 토큰을 사용하여 다른 동작 수행
-    // })
-    // .catch(error => console.error('토큰을 받아오는 중 오류 발생:', error));
-    
 
   }, []);
   const fetchAccessToken = async (code) => {
