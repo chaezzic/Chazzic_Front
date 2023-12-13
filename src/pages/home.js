@@ -17,7 +17,7 @@ function Home(){
     const formData = new URLSearchParams();
     formData.append('code', code);
 
-    fetch('http://localhost:8080/oauth/token', {
+    fetch('http://43.200.7.70:8080/oauth/token', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
