@@ -59,7 +59,7 @@ function InterviewAi(){
   };
 
   const octokit = new Octokit({
-    auth: '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'
+    auth: sessionStorage.getItem('access_token')
   });
 
   const JobcustomSelect ={

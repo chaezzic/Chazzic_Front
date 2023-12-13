@@ -11,32 +11,52 @@ function Home(){
     if (code) {
       fetchAccessToken(code);
     }
+    
+    // 이 함수를 실행하여 OAuth 인증 코드를 사용하여 액세스 토큰을 교환
+    // const fetchAccessToken = async() => {
+    //   try{
+    //     const response = await fetch('http://localhost:8080/oauth/token');
+    //     const token = await response.text();
+    //     console.log(response)
+    //     console.log("받아온 토큰: ", token)
+    //   }
+    //   catch(error){
+    //     console.error('토큰을 받아오는 중 오류 발생:', error)
+    //   }
+    // }
+    // fetchAccessToken();
+    // const code = new URLSearchParams(window.location.search).get('code');
+    // console.log(code)
+
+    // if (code) {
+    //   fetchAccessToken(code);
+    // }
+    // fetch('http://localhost:8080/oauth/token')
+    // .then(response => {
+    //   if (!response.ok) {
+    //     throw new Error(`HTTP error! Status: ${response.status}`);
+    //   }
+    //   return response.text(); // 텍스트 형식으로 응답 받기
+    // })
+    // .then(token => {
+    //   console.log('받아온 토큰:', token);
+    //   // 토큰을 사용하여 다른 동작 수행
+    // })
+    // .catch(error => console.error('토큰을 받아오는 중 오류 발생:', error));
+    
+
   }, []);
-
-  // const getAccessToken = async (code) => {
-  //   let server = `http://172.20.14.72:3002`;
-  //   let accessInfo = await axios.get(
-  //     `${server}/githubLogin?code=${code}`
-  //   );
-
-  //   let token = accessInfo.data.token;
-
-  //   const userResponse = await axios.get("https://api.github.com/user", {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
-  //   console.log(userResponse.data)
-  // }
-  
   const fetchAccessToken = async (code) => {
+    const formData = new URLSearchParams();
+    formData.append('code', code);
+
     fetch('http://localhost:8080/oauth/token', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded',
+
       },
-      body: JSON.stringify({ code })
+      body: formData
     })
     .then(response => {
       if (response.headers.get('Content-Type').includes('application/json')) {
@@ -46,13 +66,14 @@ function Home(){
     }})
     .then(data => {
       const accessToken = data.access_token;
-      console.log("데이터?", data)
+      sessionStorage.setItem('access_token', accessToken);
+      console.log("데이터?", accessToken)
       // 액세스 토큰을 사용하여 필요한 작업 수행
     })
     .catch(error => {
       console.error('Access token error', error);
     });
-  };
+  }
 
     return(
       <div className="Main">

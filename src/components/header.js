@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
 import "../style/header.css"
 import imageLogo from "../image/chaezzic-logo 1.png"
@@ -6,6 +6,12 @@ import imageLogo from "../image/chaezzic-logo 1.png"
 const Header = () => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+      // 페이지 로딩 시 세션 스토리지에서 액세스 토큰을 확인하여 로그인 상태 설정
+      const accessToken = sessionStorage.getItem("access_token");
+      setIsLoggedIn(!!accessToken);
+    }, []);
 
     const navigatetoLogin=()=>{
       navigate("/login");
@@ -21,7 +27,7 @@ const Header = () => {
     };
 
     const HandleLogout=()=>{
-      localStorage.removeItem('githubToken');
+      sessionStorage.removeItem('access_token');
       setIsLoggedIn(false)
     };
 
@@ -48,7 +54,7 @@ const Header = () => {
           </ul>
           <div>
             {isLoggedIn ? (
-              <button className="Logout">
+              <button className="Logout" onClick={HandleLogout}>
                 <div className="LogouttextWrapper">로그아웃</div>
               </button>
             ) : (
