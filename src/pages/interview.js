@@ -50,15 +50,20 @@ function InterviewAi(){
       const files = await fetchFilesFromDirectory(repo.full_name);
       return { repoName: repo.full_name, language: repo.language ,files };
     }));
-    console.log(portfolioData)
+    console.log('Submit Portfolio Data:', {
+      job: AiSelection.label,
+      portfolio: portfolioData,
+    });
 
     try {
-      const response = await fetch('http://13.48.130.241', {
+      const response = await fetch('http://13.48.130.241:5000/generate_AI', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ portfolio: portfolioData }),
+        body: JSON.stringify({ 
+          job: AiSelection.label,
+          portfolio: portfolioData }),
       });
   
       if (response.ok) {
