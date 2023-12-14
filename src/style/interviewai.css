@@ -177,9 +177,19 @@
   }
 
   .EraseButton {
-    content: url("../image/erase.png")
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    color: black;
+    background: none;
+    border: none;
   }
 
   .CloseButton {
-    content: url("../image/close.png")
+    font-size: 20px;
+    font-weight: 900;
+    cursor: pointer;
+    color: black;
+    background: none;
+    border: none;
   }
