@@ -121,6 +121,11 @@ function InterviewAi(){
   };
 
   const handleIncludeButtonClick = () => {
+    if (!sessionStorage.getItem('access_token')) {
+      alert('로그인이 필요합니다. 로그인 후 다시 시도해주세요.');
+      navigate('/login');
+      return;
+    }
     fetchRepos();
   }
 

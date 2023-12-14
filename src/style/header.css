@@ -118,3 +118,8 @@
     text-decoration: underline;
     word-wrap: break-word;
 }
+
+.Logout{
+    border: none;
+    background: none;
+}

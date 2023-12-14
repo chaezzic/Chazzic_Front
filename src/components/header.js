@@ -29,6 +29,7 @@ const Header = () => {
     const HandleLogout=()=>{
       sessionStorage.removeItem('access_token');
       setIsLoggedIn(false)
+      navigate("/")
     };
 
     return(

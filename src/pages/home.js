@@ -33,6 +33,7 @@ function Home(){
       const accessToken = data.access_token;
       sessionStorage.setItem('access_token', accessToken);
       console.log("데이터?", accessToken)
+      window.location.reload();
     })
     .catch(error => {
       console.error('Access token error', error);
