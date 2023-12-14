@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import Select from "react-select";
-import axios from "axios";
 import Header from "../components/header.js";
 import "../style/JobTrend.css";
 
@@ -55,7 +54,6 @@ const JobcustomSelect ={
 }
 
 function JobTrend(){
-  const [options, setOptions] = useState([]);
   const [joboptions, setJobOptions] = useState([]);
   const [yearoptions, setYearOptions] = useState([]);
   const [halfyearoptions, setHalfYearOptions] = useState([]);
@@ -198,9 +196,9 @@ function JobTrend(){
                 <div className="BarChart">
                   <div className="BarChartMax">
                     <div className={`Rectangle${index + 9}`}
-                       style={{width: `${Math.round(stat.skillCount / totalCount * 100 * 10) / 10}%`, height: 12, background: '#4285F4'}} />
+                       style={{width: `${Math.round(stat.skillCount / statistics[0].skillCount * 100 * 10) / 10}%`, height: 12, background: '#4285F4'}} />
                   </div>
-                  <div className="BarChartPercent">{Math.round(stat.skillCount / totalCount * 100 * 10) / 10}%</div>
+                  <div className="BarChartPercent">{stat.skillCount}</div>
                 </div>
               </div>
             ))}

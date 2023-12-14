@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import axios from "axios";
 import Header from "../components/header.js";
 import "../style/home.css";
 
@@ -21,7 +20,6 @@ function Home(){
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-
       },
       body: formData
     })
@@ -35,7 +33,6 @@ function Home(){
       const accessToken = data.access_token;
       sessionStorage.setItem('access_token', accessToken);
       console.log("데이터?", accessToken)
-      // 액세스 토큰을 사용하여 필요한 작업 수행
     })
     .catch(error => {
       console.error('Access token error', error);

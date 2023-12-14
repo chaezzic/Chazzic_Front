@@ -1,0 +1,11 @@
+.AiOutputBody{
+    width: 1440px;
+    background: #fff;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+    display: flex;
+    margin: 0 auto;
+    cursor: default;
+}

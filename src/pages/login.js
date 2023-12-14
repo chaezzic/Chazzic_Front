@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import "../style/login.css"
 import imageLogo from "../image/chaezzic-logo 1.png"
 import { useNavigate } from "react-router-dom";
-import { Axios } from "axios";
 
 const CLIENT_ID = "ceffafe3562cb1ace5af"
 const redirectURL="http://43.200.7.70:3000/"

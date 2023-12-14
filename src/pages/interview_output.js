@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Octokit } from "octokit";
 import Header from "../components/header.js";
+import '../style/AiOutput.css'
 
 function Ai_output() {
     const [repositoryContent, setRepositoryContent] = useState([]);
@@ -48,7 +49,7 @@ function Ai_output() {
     );
 
     return (
-        <div>
+        <div className="AiOutputBody">
             <Header />
             <h1>Repository Content</h1>
             {isLoading ? <p>Loading...</p> : renderContent(repositoryContent)}
