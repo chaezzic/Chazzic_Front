@@ -175,3 +175,11 @@
   .modalItem:hover {
     background-color: #f5f5f5;
   }
+
+  .EraseButton {
+    content: url("../image/erase.png")
+  }
+
+  .CloseButton {
+    content: url("../image/close.png")
+  }
