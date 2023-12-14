@@ -1,8 +1,10 @@
 import React, {useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/header.js";
 import "../style/home.css";
 
 function Home(){
+  const navigate = useNavigate();
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get('code');
     console.log(code)
@@ -33,7 +35,7 @@ function Home(){
       const accessToken = data.access_token;
       sessionStorage.setItem('access_token', accessToken);
       console.log("데이터?", accessToken)
-      window.location.reload();
+      navigate("/");
     })
     .catch(error => {
       console.error('Access token error', error);

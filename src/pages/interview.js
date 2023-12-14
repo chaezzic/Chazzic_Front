@@ -37,19 +37,28 @@ function InterviewAi(){
   };
 
   const submitPortfolio = async () => {
+    if (!AiSelection) {
+      alert('직무를 선택해주세요.');
+      return;
+    }
+
+    if (selectedRepos.length === 0) {
+      alert('포트폴리오를 추가해주세요.');
+      return;
+    }
     const portfolioData = await Promise.all(selectedRepos.map(async (repo) => {
       const files = await fetchFilesFromDirectory(repo.full_name);
       return { repoName: repo.full_name, language: repo.language ,files };
     }));
     console.log(portfolioData)
 
-    // try {
-    //   await axios.post('http://your-server-endpoint/api/upload', { portfolio: portfolioData });
-    //   alert('포트폴리오가 성공적으로 제출되었습니다.');
-    //   navigate('/some-redirect-route'); // 리다이렉트 경로
-    // } catch (error) {
-    //   console.error('Error sending portfolio to server:', error);
-    // }
+    try {
+      await axios.post('http://13.48.130.241', { portfolio: portfolioData });
+      alert('포트폴리오가 성공적으로 제출되었습니다.');
+      navigate('/interview_output'); // 리다이렉트 경로
+    } catch (error) {
+      console.error('Error sending portfolio to server:', error);
+    }
   };
 
   function isBinaryFile(fileName) {
