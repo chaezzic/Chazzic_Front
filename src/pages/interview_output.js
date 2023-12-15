@@ -13,6 +13,7 @@ function Ai_output() {
       try {
         const response = await fetch('http://13.48.130.241:5000/send_data_to_react');
         const data = await response.json();
+        console.lof(data);
 
         // Update state with fetched data
         setRepositoryContent(data);

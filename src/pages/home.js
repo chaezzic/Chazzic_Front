@@ -36,6 +36,7 @@ function Home(){
       sessionStorage.setItem('access_token', accessToken);
       console.log("데이터?", accessToken)
       navigate("/");
+      window.location.reload();
     })
     .catch(error => {
       console.error('Access token error', error);

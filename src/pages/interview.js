@@ -165,7 +165,7 @@ function InterviewAi(){
       <div className="modalContent">
         <div className="modalHeader">
           <h2>저장소 선택</h2>
-          <button className="CloseButton" onClick={() => setIsRepoModalOpen(false)}>닫기</button>
+          <button className="CloseButton" onClick={() => setIsRepoModalOpen(false)}>X</button>
         </div>
         <div className="modalBody">
           {unselectedRepos.map(repo => (
@@ -193,7 +193,7 @@ function InterviewAi(){
     return selectedRepos.map((repo, index) => (
       <div className="PopolItem" key={index}>
         <div className="RepositoryName">{repo.full_name}</div>
-        <button className="EraseButton" onClick={() => removeRepo(repo.id)}>삭제</button>
+        <button className="EraseButton" onClick={() => removeRepo(repo.id)}>x</button>
       </div>
     ));
   };
