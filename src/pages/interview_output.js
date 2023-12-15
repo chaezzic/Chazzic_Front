@@ -1,60 +1,50 @@
 import React, { useEffect, useState } from "react";
 import { Octokit } from "octokit";
 import Header from "../components/header.js";
-import '../style/AiOutput.css'
+import '../style/AiOutput.css';
 
 function Ai_output() {
-    const [repositoryContent, setRepositoryContent] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const octokit = new Octokit({ auth: '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' });
+  const [isLoading, setIsLoading] = useState(true);
+  const [repositoryContent, setRepositoryContent] = useState([]);
 
-    useEffect(() => {
-        const repoData = localStorage.getItem('selectedRepository');
-        if (repoData) {
-            const repo = JSON.parse(repoData);
-            fetchRepositoryContent(repo.full_name);
-        }
-    }, []);
+  useEffect(() => {
+    // Fetch data from the Python server
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://13.48.130.241:5000/send_data_to_react');
+        const data = await response.json();
 
-    const fetchRepositoryContent = async (fullName, path = '') => {
-        setIsLoading(true);
-        try {
-            const response = await octokit.request(`GET /repos/${fullName}/contents/${path}`);
-            const content = response.data;
-            if (Array.isArray(content)) {
-                for (const item of content) {
-                    if (item.type === 'dir') {
-                        const subdirectoryContent = await fetchRepositoryContent(fullName, item.path);
-                        item.content = subdirectoryContent;
-                    }
-                }
-                setRepositoryContent(prevContent => [...prevContent, ...content]);
-            }
-            console.log(content)
-        } catch (error) {
-            console.error('Error fetching repository content:', error);
-        }
+        // Update state with fetched data
+        setRepositoryContent(data);
         setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setIsLoading(false);
+      }
     };
 
-    const renderContent = (content) => (
-        <ul>
-            {content.map(item => (
-                <li key={item.sha}>
-                    {item.type === 'file' ? 'File' : 'Directory'}: {item.name}
-                    {item.type === 'dir' && item.content ? renderContent(item.content) : null}
-                </li>
-            ))}
-        </ul>
-    );
+    // Call the fetchData function
+    fetchData();
+  }, []); // Empty dependency array ensures that this effect runs once after the initial render
 
+  const renderContent = (content) => {
+    // Render your content based on the fetched data
+    // Modify this part based on the structure of your data
     return (
-        <div className="AiOutputBody">
-            <Header />
-            <h1>Repository Content</h1>
-            {isLoading ? <p>Loading...</p> : renderContent(repositoryContent)}
-        </div>
+      <div>
+        {content.map((item, index) => (
+          <div key={index}>{/* Render each item in the content */}</div>
+        ))}
+      </div>
     );
+  };
+
+  return (
+    <div className="AiOutputBody">
+      <Header />
+      {isLoading ? <p>Loading...</p> : renderContent(repositoryContent)}
+    </div>
+  );
 }
 
 export default Ai_output;
