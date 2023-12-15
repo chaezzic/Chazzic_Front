@@ -14,7 +14,7 @@ const joboption=[
 ];
 
 function InterviewAi(){
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const fetchFilesFromDirectory = async (repoName, path='') => {
     try {
@@ -46,6 +46,7 @@ function InterviewAi(){
       alert('포트폴리오를 추가해주세요.');
       return;
     }
+    setIsSubmitting(true);
     const portfolioData = await Promise.all(selectedRepos.map(async (repo) => {
       const files = await fetchFilesFromDirectory(repo.full_name);
       return { repoName: repo.full_name, language: repo.language ,files };
@@ -67,6 +68,8 @@ function InterviewAi(){
       });
   
       if (response.ok) {
+        const responseData = await response.json();
+        localStorage.setItem('responseFromServer', JSON.stringify(responseData));
         alert('포트폴리오가 성공적으로 제출되었습니다.');
         navigate('/interview/output'); // 리다이렉트 경로
       } else {
@@ -75,6 +78,9 @@ function InterviewAi(){
       }
     } catch (error) {
       console.error('Error sending portfolio to server:', error);
+    }
+    finally {
+      setIsSubmitting(false); // 제출이 완료되면 상태 변경
     }
   };
 
@@ -220,15 +226,17 @@ function InterviewAi(){
             </div>
             {renderRepoModal()}
             <div className="PopolIncludeList">
-              <div className="PopolList">
-                {renderPopolList()}
-              </div>
               <button className="IncludeButton" onClick={handleIncludeButtonClick}>
                 <div className="ButtonTypo">+ 포트폴리오 추가하기</div>
               </button>
+              <div className="PopolList">
+                {renderPopolList()}
+              </div>
             </div>
-            <button className="OutputButton" onClick={submitPortfolio}>
-              <div className="ButtonTypo">제출하기</div>
+            <button className="OutputButton" onClick={submitPortfolio} disabled={isSubmitting}>
+              <div className="ButtonTypo">
+                {isSubmitting ? "제출 중..." : "제출하기"}
+              </div>
             </button>
           </div>
       </div>
