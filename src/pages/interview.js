@@ -4,8 +4,6 @@ import Header from "../components/header.js"
 import { useNavigate } from "react-router-dom";
 import "../style/interviewai.css"
 import { Octokit } from "octokit";
-import eraseIcon from "../image/erase.png"
-import closeIcon from "../image/close.png"
 
 const joboption=[
     {value: "01", label: "프론트엔드 개발"},
