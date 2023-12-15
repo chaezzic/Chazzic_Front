@@ -68,7 +68,7 @@ function InterviewAi(){
   
       if (response.ok) {
         alert('포트폴리오가 성공적으로 제출되었습니다.');
-        navigate('/interview_output'); // 리다이렉트 경로
+        navigate('/interview/output'); // 리다이렉트 경로
       } else {
         const errorText = await response.text();
         console.error('Error sending portfolio to server:', errorText);
@@ -78,6 +78,7 @@ function InterviewAi(){
     }
   };
 
+  //불필요한 파일 필터링
   function isBinaryFile(fileName) {
     const extension = fileName.split('.').pop().toLowerCase();
     const binaryExtensions = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'pdf', 'exe', 'bin', 'svg', 'ico', 'ttf', 'zip', 'woff', 'woff2', 'eot', 'otf']; // 확장 가능
