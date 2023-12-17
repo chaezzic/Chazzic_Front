@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { NavLink, useNavigate } from "react-router-dom";
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Header from "../components/header.js"
 import "../style/companylist.css"
 
@@ -33,6 +34,8 @@ function CompanyList(){
     const [Skilloptions, setSkillOptions] = useState([]);
     const [CompanyList, setCompanyList] = useState([]);
     const navigate = useNavigate();
+    const [currentPage, setCurrentPage] = useState(1);
+    const companiesPerPage = 20;
     
     useEffect(()=>{
         const fetchSkillData = async() => {
@@ -72,12 +75,27 @@ function CompanyList(){
       const response = await fetch(`http://43.200.7.70:8080/jobs/showCompanyList/${encodeURIComponent(SkillselectedOption.label)}`);
       const data = await response.json();
       setCompanyList(data);
+      setCurrentPage(1);
       console.log(data)
     }
     catch(error){
       console.error('데이터 요청 실패', error);
     }
   };
+
+    // 페이지를 변경하는 함수
+    const handlePageChange = (newPage) => {
+      if (CompanyList.length === 0) {
+        return;
+      }
+      setCurrentPage(newPage);
+    };
+  
+    // 현재 페이지에 표시할 기업 리스트
+    const currentCompanies = CompanyList.slice(
+      (currentPage - 1) * companiesPerPage,
+      currentPage * companiesPerPage
+    );
 
     return(
       <div className="CompanyListBody">
@@ -117,10 +135,35 @@ function CompanyList(){
           </div>
           <div className="CompanyListFrame">
             <div className="ListTitle">기업 리스트</div>
+            <div className="CompanyNumber">기업 수 : {CompanyList.length}</div>
             <div className="CompanyList">
-              {CompanyList.map((company, index) => (
-                <div key={index} className="CompanyName">{company}</div>
-                  ))}
+              {currentCompanies.map((company, index) => (
+                <div key={index} className="CompanyName">
+                  {company}
+                </div>
+              ))}
+            </div>
+            <div className="Pagination">
+              {/* 이전 페이지로 이동하는 버튼 */}
+              <button
+                className="PageButton"
+                disabled={currentPage === 1}
+                onClick={() => handlePageChange(currentPage - 1)}
+                style={{ backgroundColor: '#fff', color: '#007BFF', border: 'none'}}
+              >
+                <FaChevronLeft />
+              </button>
+              {/* 페이지 번호 표시 */}
+              <span>{currentPage}</span>
+              {/* 다음 페이지로 이동하는 버튼 */}
+              <button
+                className="PageButton"
+                disabled={currentPage === Math.ceil(CompanyList.length / companiesPerPage)}
+                onClick={() => handlePageChange(currentPage + 1)}
+                style={{ backgroundColor: '#fff', color: '#007BFF', border: 'none'}}
+              >
+                <FaChevronRight />
+              </button>
             </div>
           </div>
         </div>            

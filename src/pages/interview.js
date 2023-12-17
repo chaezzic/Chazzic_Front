@@ -8,9 +8,11 @@ import { Octokit } from "octokit";
 const joboption=[
     {value: "01", label: "프론트엔드 개발"},
     {value: "02", label: "백엔드 개발"},
-    {value: "03", label: "풀스택 개발"},
+    {value: "03", label: "안드로이드 개발"},
     {value: "04", label: "AI 개발"},
-    {value: "05", label: "게임 개발"},
+    {value: "05", label: "소프트웨어 개발"},
+    {value: "06", label: "서버 개발"},
+    {value: "07", label: "데이터 엔지니어"}
 ];
 
 function InterviewAi(){
