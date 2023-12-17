@@ -10,7 +10,7 @@
     cursor: default;
 }
 
-.ComapanyListMainBody{
+.CompanyListMainBody{
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;

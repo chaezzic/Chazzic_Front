@@ -48,11 +48,9 @@ const Header = () => {
               <NavLink className={({isActive})=>"nav-link" + (isActive ? "a" : "")} to="/">서비스 소개</NavLink>
             </nav>
             <div className="textWrapper">
-            /* eslint-disable no-restricted-globals */
             <NavLink className={currentPath.startsWith("/jobtrend") ? "nav-linka" : "nav-link"} to="/jobtrend/jobskill">
               채용 트렌드
             </NavLink>
-            /* eslint-disable no-restricted-globals */
             </div>
             <div className="textWrapper">
               <NavLink className={({isActive})=>"nav-link" + (isActive ? "a" : "")} to="/interviewai">면접 질문 예측</NavLink>

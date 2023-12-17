@@ -86,7 +86,7 @@ function CompanyList(){
           <div className="LinkSelect">
             <div className="TrendSelect">
               <div className="TrendWrapper">
-                <NavLink className={({isActive})=>"nav-link" + (isActive ? "a" : "")} to="/jobtrend">직무별 기술 스택</NavLink>
+                <NavLink className={({isActive})=>"nav-link" + (isActive ? "a" : "")} to="/jobtrend/jobskill">직무별 기술 스택</NavLink>
               </div>
               <div className="TrendWrapper">
                 <NavLink className={({isActive})=>"nav-link" + (isActive ? "a" : "")} to="/jobtrend/companylist">기술별 기업 리스트</NavLink>
