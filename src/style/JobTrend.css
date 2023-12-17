@@ -174,3 +174,13 @@
     font-weight: 700;
     word-wrap: break-word;
 }
+
+.TrendSelect{
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+    border-bottom: 1px solid hsla(225,5%,46%,.22);
+}

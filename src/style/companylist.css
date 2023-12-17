@@ -1,0 +1,104 @@
+.CompanyListBody{
+    width: 1440px;
+    background: #fff;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+    display: flex;
+    margin: 0 auto;
+    cursor: default;
+}
+
+.ComapanyListMainBody{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 40px;
+    display: flex;
+}
+
+.CompanyListSkillSelect{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 25px;
+    display: flex;
+}
+
+.CompanyListSubtitleBox{
+    padding: 10px 24px;
+    border-radius: 10px;
+    border: 1px #4285F4 solid;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+
+.CompanyListSubtitleText{
+    color: #4285F4;
+    font-size: 18px;
+    font-family: Heebo;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.CompanySkillSelectFrame{
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 20px;
+    display: inline-flex;
+}
+
+.SkillSelectFrame{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: inline-flex;
+}
+
+.SkillSelectTitle{
+    color: #808080;
+    font-size: 16px;
+    font-family: Noto Sans KR;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.CompanyListFrame{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    display: flex;
+}
+
+.ListTitle{
+    color: #4285F4;
+    font-size: 18px;
+    font-family: Noto Sans KR;
+    font-weight: 700;
+    word-wrap: break-word;
+    border-bottom: 1px #E0E0E0 solid;
+    padding-bottom: 5px;
+}
+
+.CompanyList{
+    width: 794px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-left: 1.50px #5887D4 solid;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    display: inline-flex;
+    flex-flow: wrap;
+}
+
+.CompanyName{
+    color: black;
+    font-size: 16px;
+    font-family: Noto Sans KR;
+    font-weight: 700;
+    word-wrap: break-word;
+}

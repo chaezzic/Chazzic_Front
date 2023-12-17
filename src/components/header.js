@@ -6,6 +6,7 @@ import imageLogo from "../image/chaezzic-logo 1.png"
 const Header = () => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const currentPath = window.location.pathname;
 
     useEffect(() => {
       // 페이지 로딩 시 세션 스토리지에서 액세스 토큰을 확인하여 로그인 상태 설정
@@ -47,7 +48,11 @@ const Header = () => {
               <NavLink className={({isActive})=>"nav-link" + (isActive ? "a" : "")} to="/">서비스 소개</NavLink>
             </nav>
             <div className="textWrapper">
-              <NavLink className={({isActive})=>"nav-link" + (isActive ? "a" : "")} to="/jobtrend">채용 트렌드</NavLink>
+            /* eslint-disable no-restricted-globals */
+            <NavLink className={currentPath.startsWith("/jobtrend") ? "nav-linka" : "nav-link"} to="/jobtrend/jobskill">
+              채용 트렌드
+            </NavLink>
+            /* eslint-disable no-restricted-globals */
             </div>
             <div className="textWrapper">
               <NavLink className={({isActive})=>"nav-link" + (isActive ? "a" : "")} to="/interviewai">면접 질문 예측</NavLink>

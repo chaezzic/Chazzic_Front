@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import {NavLink, useNavigate} from "react-router-dom";
 import Select from "react-select";
 import Header from "../components/header.js";
 import "../style/JobTrend.css";
@@ -54,6 +55,7 @@ const JobcustomSelect ={
 }
 
 function JobTrend(){
+  const navigate = useNavigate();
   const [joboptions, setJobOptions] = useState([]);
   const [yearoptions, setYearOptions] = useState([]);
   const [halfyearoptions, setHalfYearOptions] = useState([]);
@@ -142,11 +144,21 @@ function JobTrend(){
       <div className="Trendbody">
         <Header/>
         <div className="MainBody">
+          <div className="LinkSelect">
+            <div className="TrendSelect">
+              <div className="TrendWrapper">
+                <NavLink className={({isActive})=>"nav-link" + (isActive ? "a" : "")} to="/jobtrend/jobskill">직무별 기술 스택</NavLink>
+              </div>
+              <div className="TrendWrapper">
+                <NavLink className={({isActive})=>"nav-link" + (isActive ? "a" : "")} to="/jobtrend/companylist">기술별 기업 리스트</NavLink>
+              </div>
+            </div>
+          </div>
           <div className="MenuSelect">
             <div className="SubTitleBox">
               <div className="SubTitletext">직무별 채용 트렌드</div>
             </div>  
-            <article className="FilterList">
+            <div className="FilterList">
               <label for="Year" className="YearOption">
                 <div className="LabelTypo">년도</div>
                 <Select
@@ -186,7 +198,7 @@ function JobTrend(){
               <button className="ButtonStyle" onClick={buttonHandler}>
                 <span className="ButtonTextWrapper">적용하기</span>
               </button>
-            </article>
+            </div>
           </div>
           <div className="SkillTrendChart">
             <div className="ChartTitle">기술 스택 트렌드</div>
