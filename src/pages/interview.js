@@ -59,7 +59,7 @@ function InterviewAi(){
     });
 
     try {
-      const response = await fetch('http://13.48.130.241:5000/generate_AI', {
+      const response = await fetch('http://localhost:5000/generate_AI', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

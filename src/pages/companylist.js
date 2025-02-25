@@ -40,7 +40,7 @@ function CompanyList(){
     useEffect(()=>{
         const fetchSkillData = async() => {
             try{
-                const response = await fetch(`http://43.200.7.70:8080/jobs/allSkills`);
+                const response = await fetch(`http://localhost:8080/jobs/allSkills`);
                 const data = await response.json();
 
                 const transformedOptions = data
@@ -72,7 +72,7 @@ function CompanyList(){
       return;
     }
     try{
-      const response = await fetch(`http://43.200.7.70:8080/jobs/showCompanyList/${encodeURIComponent(SkillselectedOption.label)}`);
+      const response = await fetch(`http://localhost:8080/jobs/showCompanyList/${encodeURIComponent(SkillselectedOption.label)}`);
       const data = await response.json();
       setCompanyList(data);
       setCurrentPage(1);
