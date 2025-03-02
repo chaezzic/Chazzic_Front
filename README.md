@@ -52,8 +52,6 @@
     - react-scripts : 5.0.1
     - react-select : 5.8.0
     - styled-components : 6.1.1
-- 관련 코드 : https://github.com/chaezzic/Chazzic_Front
-
 # 고찰
 
 ---
