@@ -6,8 +6,7 @@
 기술: AWS EC2, LLM, React, SpringBoot, Tibero
 날짜: 2023년 11월 1일 → 2023년 12월 18일
 
-![Image](https://github.com/user-attachments/assets/653b49a7-c492-474a-adfc-5dc6935f31af)
-
+![Image](https://github.com/user-attachments/assets/ebdf01b9-3bc5-47a8-92d1-ddcbfc06feba)
 # 📝 기획
 
 ---
@@ -27,17 +26,16 @@
 
 ## 🌐AWS 설계
 
-![채찍 다이어그램.drawio.png](%EC%B1%84%EC%B0%8D_%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8.drawio.png)
+![Image](https://github.com/user-attachments/assets/653b49a7-c492-474a-adfc-5dc6935f31af)
 
 ## 🎨디자인 설계
 
-![홈 페이지(서비스 소개).png](%ED%99%88_%ED%8E%98%EC%9D%B4%EC%A7%80(%EC%84%9C%EB%B9%84%EC%8A%A4_%EC%86%8C%EA%B0%9C).png)
+![Image](https://github.com/user-attachments/assets/ebdf01b9-3bc5-47a8-92d1-ddcbfc06feba)
+![Image](https://github.com/user-attachments/assets/96210682-4314-422e-ab07-ed4ea6fb12f4)
 
-![image.png](image.png)
+![Image](https://github.com/user-attachments/assets/4a0f5130-60bc-4beb-87c7-dbdd6a225bab)
 
-![image.png](image%201.png)
-
-![image.png](image%202.png)
+![Image](https://github.com/user-attachments/assets/3a776270-1fa1-4703-bd5d-280200268d32)
 
 # 👨🏻‍💻담당 구현
 
